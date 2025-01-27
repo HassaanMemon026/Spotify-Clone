@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utility.css">
+    <title>Spotify - Web Player: Music for everyone</title>
+    <script src="https://unpkg.com/compromise"></script>
+    <link rel="shortcut icon" href="https://open.spotify.com/favicon.ico" type="image/x-icon">
+</head>
+
+<body oncontextmenu="return true">
+    <div class="container bg-black flex">
+        <div class="left">
+            <img width="30" src="img/close.svg" alt="X" class="invert close">
+            <div class="home m-1 p-2 border-radius bg-gray">
+                <div class="logo"><a href="/"><img width="110px" src="img/logo.svg" alt="logo"></a></div>
+                <ul>
+                    <li class="roboto-700"><a href="/"><img src="img/home.svg" alt="home">Home</a></li>
+                    <li><a href="/"><img src="img/search.svg" alt="search">Search</a></li>
+                </ul>
+            </div>
+            <div class="library bg-gray m-1 p-1 border-radius">
+                <div class="heading">
+                    <img class="invert" src="img/playlist.svg" alt="playlist">
+                    <h2>Your Library</h2>
+
+                </div>
+                <div class="songList">
+                    <ul>
+
+                    </ul>
+                </div>
+
+                <div class="footer">
+                    <div><a href="https://github.com/HassaanMemon026" target="_blank"><span>GitHub</span></a></div>
+                    <div><a href="https://www.linkedin.com/in/muhammad-hassaan026"
+                            target="_blank"><span>LinkedIn</span></a></div>
+                    <div><a href="https://github.com/HassaanMemon026" target="_blank"><span>About</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="header m-1 bg-gray border-radius">
+                <div class="nav">
+                    <div class="hamburgercontainer">
+                        <img class="hamburger invert" width="30" src="img/hamburger.svg" alt="|||">
+
+
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15 6L9.70711 11.2929C9.37377 11.6262 9.20711 11.7929 9.20711 12C9.20711 12.2071 9.37377 12.3738 9.70711 12.7071L15 18"
+                                stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 18L14.2929 12.7071C14.6262 12.3738 14.7929 12.2071 14.7929 12C14.7929 11.7929 14.6262 11.6262 14.2929 11.2929L9 6"
+                                stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+
+                    </div>
+                </div>
+                <div class="button">
+                    <button class="signup-btn sl-btn">Sign up</button>
+                    <button class="login-btn sl-btn">Log in</button>
+                </div>
+            </div>
+            <div class="spotifyPlaylists m-1 border-radius">
+                <h1>Spotify Playlists</h1>
+                <div class="cardContainer">
+                    <!-- <div class="card">
+                        <div class="play">
+                            <svg width="23" height="23" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <img src="https://i.scdn.co/image/ab67616d00001e0272a77d038887cdc425f5ee55" alt="">
+                        <h2>Jo Tum Mere Ho</h2>
+                        <p>Anuv Jain</p>
+                    </div> -->
+
+                </div>
+                <div class="playbar invert">
+                    <div class="seekbar">
+                        <div class="circle">
+
+                        </div>
+                    </div>
+                    <div class="playrap">
+                        <div class="playbarInfo">
+
+                        </div>
+                        <div class="playbarButtons">
+                            <img width="30" id="previous" src="img/prevmp3.svg" alt="Previus">
+                            <img width="30" id="play" src="img/play.svg" alt="Play/Pause">
+                            <img width="30" id="next" src="img/nextmp3.svg" alt="Next">
+                        </div>
+                        <div class="timevol">
+                            <div class="playbarTime">
+
+                            </div>
+                            <div class="volume">
+                                <img src="img/volume.svg" alt="Volume">
+                                <div class="range">
+                                    <input type="range" name="volume" min="0" max="100" value="100" class="volume-bar"
+                                        id="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
