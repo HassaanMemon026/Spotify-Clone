@@ -2,34 +2,26 @@ let currentSong = new Audio();
 let songs;
 let currenFolder;
 let currentFolderName;
-let mainFolder = "mp3/";
+let mainFolder = "mp3/"
 let localfatch = "";
 let index;
 
 let previous = document.querySelector("#previous");
 let play = document.querySelector("#play");
-let next = document.querySelector("#next");
-
-/**
- * Fetches the list of folders and displays them as cards
- * @param {string} folder - The folder path to fetch
- */
+let next = document.querySelector("#next")
 async function getFolder(folder) {
-    try {
-        let response = await fetch(`${localfatch}${folder}/`);
-        let text = await response.text();
-        let div = document.createElement("div");
-        div.innerHTML = text;
-        let cardContainer = document.querySelector(".cardContainer");
-        let as = div.getElementsByTagName("a");
-
-        Array.from(as).forEach(async (e) => {
-            if (e.href.includes("mp3/") && e.href.endsWith("/")) {
-                let folder = e.innerText.slice(0, -1);
-                try {
-                    let response = await fetch(`${localfatch}mp3/${folder}/info.json`);
-                    let folderInfo = await response.json();
-                    cardContainer.innerHTML += `<div class="card" data-folder="${folder}">
+    let a = await fetch(`${localfatch}${folder}/`);
+    let response = await a.text();
+    let div = document.createElement("div")
+    div.innerHTML = response;
+    let cardContainer = document.querySelector(".cardContainer")
+    let as = div.getElementsByTagName("a")
+    Array.from(as).forEach(async (e) => {
+        if (e.href.includes("mp3/") && e.href.endsWith("/")) {
+            let folder = e.innerText.slice(0, -1)
+            let a = await fetch(`${localfatch}mp3/${folder}/info.json`);
+            let response = await a.json();
+            cardContainer.innerHTML = cardContainer.innerHTML + `<div class="card" data-folder="${folder}">
                         <div class="play">
                             <svg width="23" height="23" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -38,24 +30,12 @@ async function getFolder(folder) {
                             </svg>
                         </div>
                         <img src="/mp3/${folder}/background.jpg" alt="">
-                        <h2>${folderInfo.title}</h2>
-                        <p>${folderInfo.description}</p>
-                    </div>`;
-                } catch (error) {
-                    console.error(`Error fetching info.json for folder ${folder}:`, error);
-                }
-            }
-        });
-    } catch (error) {
-        console.error(`Error fetching folder ${folder}:`, error);
-    }
+                        <h2>${response.title}</h2>
+                        <p>${response.description}</p>
+                    </div>`
+        }
+    });
 }
-
-/**
- * Converts seconds to a formatted string of minutes and seconds (MM:SS)
- * @param {number} seconds - The number of seconds
- * @returns {string} - The formatted time string
- */
 function secondsToMinutesSeconds(seconds) {
     if (isNaN(seconds) || seconds < 0) {
         return "00:00";
@@ -69,64 +49,45 @@ function secondsToMinutesSeconds(seconds) {
 
     return `${formattedMinutes}:${formattedSeconds}`;
 }
-
-/**
- * Fetches the list of songs in a folder
- * @param {string} folder - The folder path to fetch
- * @returns {Promise<string[]>} - A promise that resolves to the list of song URLs
- */
 async function getSong(folder) {
     currenFolder = folder;
-    try {
-        let response = await fetch(`${localfatch}${folder}/`);
-        let text = await response.text();
-        let div = document.createElement("div");
-        div.innerHTML = text;
-        let as = div.getElementsByTagName("a");
-        songs = [];
-
-        for (let index = 0; index < as.length; index++) {
-            const element = as[index];
-            if (element.href.endsWith(".mp3")) {
-                songs.push(element.href);
-            }
+    let a = await fetch(`${localfatch}${folder}/`);
+    let response = await a.text();
+    let div = document.createElement("div")
+    div.innerHTML = response;
+    let as = div.getElementsByTagName("a")
+    songs = [];
+    for (let index = 0; index < as.length; index++) {
+        const element = as[index];
+        if (element.href.endsWith(".mp3")) {
+            songs.push(element.href);
         }
-        return songs;
-    } catch (error) {
-        console.error(`Error fetching songs from folder ${folder}:`, error);
-        return [];
     }
+    return songs
+
 }
 
-/**
- * Fetches the list of song names in a folder
- * @param {string} folder - The folder path to fetch
- * @returns {Promise<string[]>} - A promise that resolves to the list of song names
- */
 async function getSongName(folder) {
     currenFolder = folder;
-    try {
-        let response = await fetch(`${localfatch}${folder}/`);
-        let text = await response.text();
-        let div = document.createElement("div");
-        div.innerHTML = text;
-        let as = div.getElementsByTagName("a");
-        let rSongs = [];
-        let Nsongs = [];
+    let a = await fetch(`${localfatch}${folder}/`);
+    let response = await a.text();
+    let div = document.createElement("div")
+    div.innerHTML = response;
 
-        for (let index = 0; index < as.length; index++) {
-            const element = as[index];
-            if (element.href.endsWith(".mp3")) {
-                Nsongs.push(element.innerHTML.slice(0, -3));
-            }
+    let as = div.getElementsByTagName("a")
+    let rSongs = [];
+    let Nsongs = [];
+    for (let index = 0; index < as.length; index++) {
+        const element = as[index];
+        if (element.href.endsWith(".mp3")) {
+            Nsongs.push(element.innerHTML.slice(0, -3));
         }
-
-        return Nsongs;
-    } catch (error) {
-        console.error(`Error fetching song names from folder ${folder}:`, error);
-        return [];
     }
+
+    return Nsongs
+
 }
+
 function playSong(element, rPlay) {
     currentSong.src = element;
     currentSong.play();
@@ -248,7 +209,7 @@ async function main() {
             let songUl = document.querySelector(".songList").getElementsByTagName("ul")[0]
             songUl.innerHTML = "";
             let folder = element.currentTarget.dataset.folder;
-            currenFolder = `./${mainFolder}${folder}`;
+            currenFolder = `${mainFolder}${folder}`;
             songs = await getSong(currenFolder.replaceAll(" ", "%20"));
             songsName = await getSongName(currenFolder.replaceAll(" ", "%20"));
             //Show all songs in the play list
