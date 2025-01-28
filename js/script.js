@@ -3,13 +3,14 @@ let songs;
 let currenFolder;
 let currentFolderName;
 let mainFolder = "mp3/";
+let localfetch = "https://hassaanmemon026.github.io/Spotify-Clone";
 let index;
 
 let previous = document.querySelector("#previous");
 let play = document.querySelector("#play");
 let next = document.querySelector("#next")
 async function getFolder(folder) {
-    let a = await fetch(`./${folder}/`);
+    let a = await fetch(`${localfetch}/${folder}/`);
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -18,7 +19,7 @@ async function getFolder(folder) {
     Array.from(as).forEach(async (e) => {
         if (e.href.includes("mp3/") && e.href.endsWith("/")) {
             let folder = e.innerText.slice(0, -1)
-            let a = await fetch(`./mp3/${folder}/info.json`);
+            let a = await fetch(`${localfetch}/mp3/${folder}/info.json`);
             let response = await a.json();
             cardContainer.innerHTML = cardContainer.innerHTML + `<div class="card" data-folder="${folder}">
                         <div class="play">
@@ -50,7 +51,7 @@ function secondsToMinutesSeconds(seconds) {
 }
 async function getSong(folder) {
     currenFolder = folder;
-    let a = await fetch(`./${folder}/`);
+    let a = await fetch(`${localfetch}/${folder}/`);
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -68,7 +69,7 @@ async function getSong(folder) {
 
 async function getSongName(folder) {
     currenFolder = folder;
-    let a = await fetch(`./${folder}/`);
+    let a = await fetch(`${localfetch}/${folder}/`);
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
