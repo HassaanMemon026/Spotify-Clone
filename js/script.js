@@ -9,7 +9,7 @@ let previous = document.querySelector("#previous");
 let play = document.querySelector("#play");
 let next = document.querySelector("#next")
 async function getFolder(folder) {
-    let a = await fetch(`${folder}/`);
+    let a = await fetch(`./${folder}/`);
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -18,7 +18,7 @@ async function getFolder(folder) {
     Array.from(as).forEach(async (e) => {
         if (e.href.includes("mp3/") && e.href.endsWith("/")) {
             let folder = e.innerText.slice(0, -1)
-            let a = await fetch(`mp3/${folder}/info.json`);
+            let a = await fetch(`./mp3/${folder}/info.json`);
             let response = await a.json();
             cardContainer.innerHTML = cardContainer.innerHTML + `<div class="card" data-folder="${folder}">
                         <div class="play">
@@ -50,7 +50,7 @@ function secondsToMinutesSeconds(seconds) {
 }
 async function getSong(folder) {
     currenFolder = folder;
-    let a = await fetch(`${folder}/`);
+    let a = await fetch(`./${folder}/`);
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -68,7 +68,7 @@ async function getSong(folder) {
 
 async function getSongName(folder) {
     currenFolder = folder;
-    let a = await fetch(`${folder}/`);
+    let a = await fetch(`./${folder}/`);
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -208,7 +208,7 @@ async function main() {
             let songUl = document.querySelector(".songList").getElementsByTagName("ul")[0]
             songUl.innerHTML = "";
             let folder = element.currentTarget.dataset.folder;
-            currenFolder = `${mainFolder}${folder}`;
+            currenFolder = `./${mainFolder}${folder}`;
             songs = await getSong(currenFolder.replaceAll(" ", "%20"));
             songsName = await getSongName(currenFolder.replaceAll(" ", "%20"));
             //Show all songs in the play list
