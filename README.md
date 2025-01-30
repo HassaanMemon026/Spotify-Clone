@@ -60,7 +60,9 @@ Spotify-Clone/
 ## 🌍 Live Demo 
 
 Click here to experience the Naat Player!  
-(*Replace # with your live URL, e.g., GitHub Pages or Netlify link*)
+
+ **Important:** [This website currently supports a limited number of MP3 files with restricted fetching speed.
+ ](https://spotifie-clone.freewebhostmost.com/)
 
 
 ---
