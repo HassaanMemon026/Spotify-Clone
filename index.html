@@ -9,6 +9,29 @@
     <title>Spotify - Web Player: Music for everyone</title>
     <script src="https://unpkg.com/compromise"></script>
     <link rel="shortcut icon" href="https://open.spotify.com/favicon.ico" type="image/x-icon">
+    <style>
+      .sl-btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 5px;
+    }
+
+    .button {
+        display: flex;
+        gap: 10px;
+    }
+
+    #user-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    </style>
 </head>
 
 <body oncontextmenu="return true">
@@ -40,7 +63,7 @@
                             target="_blank"><span>Project-Code</span></a></div>
                     <div><a href="https://github.com/HassaanMemon026" target="_blank"><span>About</span></a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -64,9 +87,9 @@
 
                     </div>
                 </div>
-                <div class="button">
-                    <button class="signup-btn sl-btn">Sign up</button>
-                    <button class="login-btn sl-btn">Log in</button>
+                <div class="button" id="auth-container">
+                    <button id="signup-button" class="signup-btn sl-btn">Sign up</button>
+                    <button id="signin-button" class="login-btn sl-btn">Log in</button>
                 </div>
             </div>
             <div class="spotifyPlaylists m-1 border-radius">
@@ -118,6 +141,46 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Initialize Clerk with your
+Clerk Publishable Key and Frontend API URL -->
+        <!-- add here your clerk script tag key and frontend api url -->
+
+        <script>
+            window.addEventListener('load', async function () {
+                await Clerk.load()
+        
+                const authContainer = document.getElementById('auth-container')
+                const signUpButton = document.getElementById('signup-button')
+                const signInButton = document.getElementById('signin-button')
+        
+                if (Clerk.user) {
+                    authContainer.innerHTML = `<div id="user-button"></div>`
+        
+                    const userButtonDiv = document.getElementById('user-button')
+                    Clerk.mountUserButton(userButtonDiv, {
+                        appearance: {
+                            elements: {
+                                userButtonAvatarBox: {
+                                    width: "40px",  /* پروفائل پکچر کی چوڑائی */
+                                    height: "40px", /* پروفائل پکچر کی اونچائی */
+                                    borderRadius: "50%", /* گول شکل */
+                                }
+                            }
+                        }
+                    })
+                } else {
+                    signUpButton.addEventListener('click', function () {
+                        Clerk.openSignUp()
+                    })
+        
+                    signInButton.addEventListener('click', function () {
+                        Clerk.openSignIn()
+                    })
+                }
+            })
+        </script>
     <script src="js/script.js"></script>
 </body>
 
