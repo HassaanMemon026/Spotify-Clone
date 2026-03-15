@@ -51,7 +51,7 @@ Spotify-Clone/
 1. **Clone the repository**:  
    `git clone https://github.com/HassaanMemon026/Spotify-Clone.git`
 
-2. Open the `index.html` file in your browser.
+2. Open the `index.html` file in your browser with Live Preview or Live Server.
 
 3. 🎵 **Enjoy the soulful Naats experience!** 🎶
 
