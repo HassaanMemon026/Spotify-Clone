@@ -17,7 +17,7 @@ async function getFolder(folder) {
     let cardContainer = document.querySelector(".cardContainer")
     let as = div.getElementsByTagName("a")
     Array.from(as).forEach(async (e) => {
-        if (e.href.includes("mp3/") && e.href.endsWith("/")) {
+        if (e.href.includes("mp3") && e.href.endsWith("/")) {
             let folder = e.innerText.slice(0, -1)
             let a = await fetch(`${localfatch}mp3/${folder}/info.json`);
             let response = await a.json();
@@ -108,7 +108,7 @@ async function playFirstSong(element, pause = false) {
 
     }
     // document.querySelector(".playbarInfo").innerHTML = element.split("mp3/")[1].replaceAll("%20", " ").slice(0, -3);
-    document.querySelector(".playbarInfo").innerHTML = decodeURI(element).split("mp3/")[1].split("/")[1].slice(0, -3);
+    document.querySelector(".playbarInfo").innerHTML = decodeURI(element).replaceAll("\\", "/").split("/").pop().replace(/\.mp3$/i, "");
 
     currentSong.addEventListener("loadedmetadata", () => {
 
